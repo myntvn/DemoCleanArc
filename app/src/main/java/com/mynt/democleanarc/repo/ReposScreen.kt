@@ -42,6 +42,7 @@ fun ReposScreen(
                         },
                         modifier = Modifier.fillMaxWidth(),
                         textStyle = TextStyle(color = Color.White),
+                        singleLine = true,
                         trailingIcon = {
                             IconButton(
                                 onClick = { viewModel.search(query) }
@@ -59,37 +60,40 @@ fun ReposScreen(
         }
     ) { padding ->
         when (repos.loadState.refresh) {
-            is LoadState.NotLoading -> Unit
             is LoadState.Loading -> {
                 Loading()
             }
             is LoadState.Error -> {
                 Error()
             }
-            else -> Unit
-        }
-
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            contentPadding = PaddingValues(8.dp)
-        ) {
-            items(repos) { repo ->
-                GithubRepo(repo = repo)
-            }
-
-            when (repos.loadState.append) {
-                is LoadState.NotLoading -> Unit
-                is LoadState.Loading -> loadingMore()
-                is LoadState.Error -> loadingMoreError()
-                else -> Unit
+            else -> {
+                RepoList(repos = repos, Modifier.padding(padding))
             }
         }
     }
+}
 
+@Composable
+private fun RepoList(
+    repos: LazyPagingItems<Repo>,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+        contentPadding = PaddingValues(8.dp)
+    ) {
+        items(repos) { repo ->
+            GithubRepo(repo = repo)
+        }
 
+        when (repos.loadState.append) {
+            is LoadState.NotLoading -> Unit
+            is LoadState.Loading -> loadingMore()
+            is LoadState.Error -> loadingMoreError()
+            else -> Unit
+        }
+    }
 }
 
 @Composable
@@ -125,7 +129,6 @@ private fun Loading() {
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center
         )
-
     }
 }
 
