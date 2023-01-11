@@ -4,13 +4,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -27,36 +23,14 @@ fun ReposScreen(
 ) {
     val repos: LazyPagingItems<Repo> = viewModel.repos.collectAsLazyPagingItems()
 
-    var query by remember {
-        mutableStateOf("android")
-    }
+    val query by viewModel.query.collectAsState()
 
     Scaffold(
         topBar = {
-            TopAppBar {
-                Row {
-                    TextField(
-                        value = query,
-                        onValueChange = {
-                            query = it
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        textStyle = TextStyle(color = Color.White),
-                        singleLine = true,
-                        trailingIcon = {
-                            IconButton(
-                                onClick = { viewModel.search(query) }
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Filled.Search,
-                                    contentDescription = "search",
-                                    tint = Color.White
-                                )
-                            }
-                        }
-                    )
-                }
-            }
+            AppBar(
+                title = query,
+                onSearch = { viewModel.search(it) }
+            )
         }
     ) { padding ->
         when (repos.loadState.refresh) {

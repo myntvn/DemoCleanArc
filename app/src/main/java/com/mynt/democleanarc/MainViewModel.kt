@@ -15,7 +15,7 @@ class MainViewModel @Inject constructor(
     private val searchReposUseCase: SearchReposUseCase
 ) : ViewModel() {
 
-    private val query = MutableStateFlow("android")
+    val query = MutableStateFlow(SearchReposUseCase.DEFAULT_QUERY)
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val repos = query.flatMapLatest {

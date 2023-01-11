@@ -16,4 +16,8 @@ class SearchReposUseCase @Inject constructor(
         return repoRepository.searchRepos(query, perPage)
     }
 
+    companion object {
+        const val DEFAULT_QUERY = "android"
+    }
+
 }
