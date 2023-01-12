@@ -9,10 +9,11 @@ data class RepoSearchResponse(
 )
 
 data class RepoResponse(
-    @SerializedName("id") val id: String,
+    @SerializedName("id") val id: Long,
     @SerializedName("name") val name: String,
     @SerializedName("full_name") val fullName: String,
     @SerializedName("description") val description: String?,
+    @SerializedName("html_url") val url: String,
 )
 
 fun RepoResponse.toDomainModel(): Repo {
@@ -20,6 +21,7 @@ fun RepoResponse.toDomainModel(): Repo {
         id = id,
         name = name,
         fullName = fullName,
-        description = description
+        description = description,
+        url = url
     )
 }

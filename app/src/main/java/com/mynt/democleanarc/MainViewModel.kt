@@ -19,8 +19,8 @@ class MainViewModel @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val repos = query.flatMapLatest {
-        searchReposUseCase(it).cachedIn(viewModelScope)
-    }
+        searchReposUseCase(it)
+    }.cachedIn(viewModelScope)
 
     fun search(query: String) {
         if (query.isNotBlank()) {

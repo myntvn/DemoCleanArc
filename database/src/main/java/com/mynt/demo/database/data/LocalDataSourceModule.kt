@@ -14,4 +14,9 @@ abstract class LocalDataSourceModule {
         plantLocalDataSourceImpl: PlantLocalDataSourceImpl
     ): PlantLocalDataSource
 
+    @Binds
+    abstract fun bindsRepoLocalDataSource(
+        repoLocalDataSourceImpl: RepoLocalDataSourceImpl
+    ): RepoLocalDataSource
+
 }

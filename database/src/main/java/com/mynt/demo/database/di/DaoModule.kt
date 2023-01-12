@@ -1,7 +1,7 @@
 package com.mynt.demo.database.di
 
 import com.mynt.demo.database.DemoDatabase
-import com.mynt.demo.database.dao.PlantDao
+import com.mynt.demo.database.dao.RepoDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,8 +12,6 @@ import dagger.hilt.components.SingletonComponent
 object DaoModule {
 
     @Provides
-    fun providePlantDao(
-        database: DemoDatabase
-    ): PlantDao = database.plantDao()
+    fun provideRepoDao(database: DemoDatabase): RepoDao = database.repoDao()
 
 }

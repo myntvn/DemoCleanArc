@@ -1,5 +1,6 @@
 package com.mynt.democleanarc.repo
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
@@ -24,6 +25,8 @@ fun ReposScreen(
     val repos: LazyPagingItems<Repo> = viewModel.repos.collectAsLazyPagingItems()
 
     val query by viewModel.query.collectAsState()
+
+    Log.i("----repo", repos.itemCount.toString())
 
     Scaffold(
         topBar = {
