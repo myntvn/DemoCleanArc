@@ -10,11 +10,6 @@ import dagger.hilt.components.SingletonComponent
 abstract class LocalDataSourceModule {
 
     @Binds
-    abstract fun bindsPlantLocalDataSource(
-        plantLocalDataSourceImpl: PlantLocalDataSourceImpl
-    ): PlantLocalDataSource
-
-    @Binds
     abstract fun bindsRepoLocalDataSource(
         repoLocalDataSourceImpl: RepoLocalDataSourceImpl
     ): RepoLocalDataSource
