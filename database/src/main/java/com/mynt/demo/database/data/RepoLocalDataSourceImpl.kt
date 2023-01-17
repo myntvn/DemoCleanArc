@@ -24,6 +24,7 @@ class RepoLocalDataSourceImpl @Inject constructor(
         val repoEntities = repos.map { repo ->
             RepoEntity(
                 id = repo.id,
+                stars = repo.stars,
                 name = repo.name,
                 fullName = repo.fullName,
                 description = repo.description,

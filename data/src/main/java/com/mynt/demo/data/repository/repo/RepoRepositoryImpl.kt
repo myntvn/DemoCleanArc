@@ -15,12 +15,8 @@ class RepoRepositoryImpl @Inject constructor(
     private val repoLocalDataSource: RepoLocalDataSource
 ) : RepoRepository {
 
-    override fun searchRepos(query: String, perPage: Int): Flow<PagingData<Repo>> {
-        return search(query, perPage)
-    }
-
     @OptIn(ExperimentalPagingApi::class)
-    private fun search(query: String, perPage: Int): Flow<PagingData<Repo>> {
+    override fun searchRepos(query: String, perPage: Int): Flow<PagingData<Repo>> {
         return Pager(
             PagingConfig(
                 pageSize = perPage
@@ -38,6 +34,6 @@ class RepoRepositoryImpl @Inject constructor(
                 repo.toDomainModel()
             }
         }
-
     }
+
 }

@@ -8,6 +8,7 @@ import com.mynt.demo.model.Repo
 @Entity(tableName = "repos")
 class RepoEntity(
     @PrimaryKey val id: Long,
+    val stars : Int,
     val name: String,
     @ColumnInfo(name = "full_name") val fullName: String,
     val description: String?,
@@ -19,6 +20,7 @@ class RepoEntity(
 fun RepoEntity.toDomainModel(): Repo {
     return Repo(
         id = id,
+        stars = stars,
         name = name,
         fullName = fullName,
         description = description,

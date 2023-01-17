@@ -1,7 +1,6 @@
 package com.mynt.demo.database.di
 
 import android.content.Context
-import androidx.room.Room
 import com.mynt.demo.database.DemoDatabase
 import dagger.Module
 import dagger.Provides
@@ -17,9 +16,5 @@ object DatabaseModule {
     @Singleton
     fun provideDemoDatabase(
         @ApplicationContext context: Context
-    ): DemoDatabase = Room.databaseBuilder(
-        context,
-        DemoDatabase::class.java,
-        "demo-database"
-    ).build()
+    ): DemoDatabase = DemoDatabase.getInstance(context)
 }

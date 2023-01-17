@@ -17,7 +17,7 @@ interface RepoDao {
     @Query("SELECT * FROM repos WHERE id = :id")
     suspend fun getRepo(id: Long): RepoEntity?
 
-    @Query("SELECT * FROM repos")
+    @Query("SELECT * FROM repos ORDER BY stars DESC, name ASC")
     fun pagingSource(): PagingSource<Int, RepoEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

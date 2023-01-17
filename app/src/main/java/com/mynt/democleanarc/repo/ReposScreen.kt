@@ -1,6 +1,5 @@
 package com.mynt.democleanarc.repo
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
@@ -25,8 +24,6 @@ fun ReposScreen(
     val repos: LazyPagingItems<Repo> = viewModel.repos.collectAsLazyPagingItems()
 
     val query by viewModel.query.collectAsState()
-
-    Log.i("----repo", repos.itemCount.toString())
 
     Scaffold(
         topBar = {
@@ -60,7 +57,9 @@ private fun RepoList(
         verticalArrangement = Arrangement.spacedBy(10.dp),
         contentPadding = PaddingValues(8.dp)
     ) {
-        items(repos) { repo ->
+        items(repos, key = {
+            it.id
+        }) { repo ->
             GithubRepo(repo = repo)
         }
 
