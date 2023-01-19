@@ -67,7 +67,9 @@ private fun UserList(
         when (users.loadState.append) {
             is LoadState.NotLoading -> Unit
             is LoadState.Loading -> loadingMore()
-            is LoadState.Error -> loadingMoreError()
+            is LoadState.Error -> loadingMoreError {
+                users.retry()
+            }
             else -> Unit
         }
     }

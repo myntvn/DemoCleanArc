@@ -4,9 +4,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -16,6 +19,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.mynt.demo.model.Repo
 import com.mynt.democleanarc.MainViewModel
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
 fun ReposScreen(
@@ -127,12 +131,26 @@ fun Error() {
     )
 }
 
-fun LazyListScope.loadingMoreError() {
+fun LazyListScope.loadingMoreError(retry: () -> Unit = {}) {
     item {
-        Text(
-            text = "Load more error",
+        Row(
             modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center
-        )
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "Load more error",
+                textAlign = TextAlign.Center
+            )
+
+            IconButton(onClick = retry) {
+                Icon(
+                    imageVector = Icons.Filled.Refresh,
+                    contentDescription = "retry",
+                    tint = Color.Red
+                )
+            }
+
+        }
     }
 }

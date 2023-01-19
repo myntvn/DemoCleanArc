@@ -15,25 +15,36 @@ class UserRepositoryImpl @Inject constructor(
     private val userLocalDataSource: UserLocalDataSource
 ) : UserRepository {
 
-    @OptIn(ExperimentalPagingApi::class)
+    //    @OptIn(ExperimentalPagingApi::class)
+//    override fun searchUsers(query: String, perPage: Int): Flow<PagingData<User>> {
+//        return Pager(
+//            config = PagingConfig(
+//                pageSize = perPage
+//            ),
+//            remoteMediator = UserRemoteMediator(
+//                query = query,
+//                userRemoteDataSource = userRemoteDataSource,
+//                userLocalDataSource = userLocalDataSource
+//            ),
+//            pagingSourceFactory = {
+//                userLocalDataSource.pagingSource()
+//            }
+//        ).flow.map { pagingData ->
+//            pagingData.map { user ->
+//                user.toDomainModel()
+//            }
+//        }
+//    }
     override fun searchUsers(query: String, perPage: Int): Flow<PagingData<User>> {
         return Pager(
-            config = PagingConfig(
-                pageSize = perPage
-            ),
-            remoteMediator = UserRemoteMediator(
-                query = query,
-                userRemoteDataSource = userRemoteDataSource,
-                userLocalDataSource = userLocalDataSource
+            PagingConfig(
+                pageSize = perPage,
+                prefetchDistance = 5
             ),
             pagingSourceFactory = {
-                userLocalDataSource.pagingSource()
+                UserPagingSource( userRemoteDataSource, query, perPage)
             }
-        ).flow.map { pagingData ->
-            pagingData.map { user ->
-                user.toDomainModel()
-            }
-        }
+        ).flow
     }
 
 }
