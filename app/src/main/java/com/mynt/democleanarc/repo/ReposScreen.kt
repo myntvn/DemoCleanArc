@@ -123,12 +123,23 @@ fun LazyListScope.loadingMore() {
 }
 
 @Composable
-fun Error() {
-    Text(
-        text = "Error",
+fun Error(retry: () -> Unit = {}) {
+    Row(
         modifier = Modifier.fillMaxSize(),
-        textAlign = TextAlign.Center
-    )
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Text(text = "Error")
+
+        IconButton(onClick = retry) {
+            Icon(
+                imageVector = Icons.Filled.Refresh,
+                contentDescription = "retry",
+                tint = Color.Red
+            )
+        }
+
+    }
 }
 
 fun LazyListScope.loadingMoreError(retry: () -> Unit = {}) {

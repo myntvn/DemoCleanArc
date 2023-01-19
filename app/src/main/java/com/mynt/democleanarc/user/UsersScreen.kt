@@ -36,7 +36,9 @@ fun UsersScreen(
                 Loading()
             }
             is LoadState.Error -> {
-                Error()
+                Error {
+                    users.refresh()
+                }
             }
             else -> {
                 UserList(users = users, Modifier.padding(padding))
