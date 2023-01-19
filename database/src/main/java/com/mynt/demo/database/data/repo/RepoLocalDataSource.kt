@@ -1,4 +1,4 @@
-package com.mynt.demo.database.data
+package com.mynt.demo.database.data.repo
 
 import androidx.paging.PagingSource
 import com.mynt.demo.database.model.RepoEntity

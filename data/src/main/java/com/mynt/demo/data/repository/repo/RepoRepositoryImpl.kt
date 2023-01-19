@@ -1,7 +1,7 @@
 package com.mynt.demo.data.repository.repo
 
 import androidx.paging.*
-import com.mynt.demo.database.data.RepoLocalDataSource
+import com.mynt.demo.database.data.repo.RepoLocalDataSource
 import com.mynt.demo.database.model.toDomainModel
 import com.mynt.demo.domain.repository.RepoRepository
 import com.mynt.demo.model.Repo

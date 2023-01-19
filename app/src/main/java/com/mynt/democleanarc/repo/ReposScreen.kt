@@ -95,7 +95,7 @@ fun GithubRepo(repo: Repo?) {
 }
 
 @Composable
-private fun Loading() {
+fun Loading() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -108,7 +108,7 @@ private fun Loading() {
     }
 }
 
-private fun LazyListScope.loadingMore() {
+fun LazyListScope.loadingMore() {
     item {
         Text(
             text = "Loading more...",
@@ -119,7 +119,7 @@ private fun LazyListScope.loadingMore() {
 }
 
 @Composable
-private fun Error() {
+fun Error() {
     Text(
         text = "Error",
         modifier = Modifier.fillMaxSize(),
@@ -127,7 +127,7 @@ private fun Error() {
     )
 }
 
-private fun LazyListScope.loadingMoreError() {
+fun LazyListScope.loadingMoreError() {
     item {
         Text(
             text = "Load more error",

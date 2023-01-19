@@ -1,4 +1,4 @@
-package com.mynt.demo.database.data
+package com.mynt.demo.database.data.repo
 
 import androidx.paging.*
 import com.mynt.demo.database.dao.RepoDao

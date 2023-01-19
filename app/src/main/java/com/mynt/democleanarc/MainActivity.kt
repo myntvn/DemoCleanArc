@@ -10,12 +10,16 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.mynt.democleanarc.repo.ReposScreen
 import com.mynt.democleanarc.ui.theme.DemoCleanArcTheme
+import com.mynt.democleanarc.user.UserViewModel
+import com.mynt.democleanarc.user.UsersScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val viewModel: MainViewModel by viewModels()
+    
+    private val userModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +31,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    ReposScreen(viewModel = viewModel)
+//                    ReposScreen(viewModel = viewModel)
+                    UsersScreen(viewModel = userModel)
                 }
             }
         }
